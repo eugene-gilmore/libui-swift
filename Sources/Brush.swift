@@ -126,14 +126,14 @@ public class DrawBrush {
 	}
 
 	deinit {
-		self.cStops.deinitialize()
-		self.cStops.deallocate(capacity:self.cNumStops)
+		self.cStops.deinitialize(count: self.cNumStops)
+		self.cStops.deallocate()
 	}
 
 	private func updateCStops() -> Void {
 		// Remove the previous cStops
-		self.cStops.deinitialize()
-		self.cStops.deallocate(capacity:self.cNumStops)
+		self.cStops.deinitialize(count: self.cNumStops)
+		self.cStops.deallocate()
 
 		// Create the new cStops
 		self.cStops = UnsafeMutablePointer<clibui.uiDrawBrushGradientStop>.allocate(capacity:self.stops.count)
@@ -238,19 +238,22 @@ public class StrokeParams {
 	}
 
 	deinit {
-		self.cDashes.deinitialize()
-		self.cDashes.deallocate(capacity:self.cNumDashes)
+		self.cDashes.deinitialize(count: self.cNumDashes)
+		self.cDashes.deallocate()
 	}
 
 	private func updateCDashes() -> Void {
 		// Remove the previous cDashes
-		self.cDashes.deinitialize()
-		self.cDashes.deallocate(capacity:self.cNumDashes)
+		self.cDashes.deinitialize(count: self.cNumDashes)
+		self.cDashes.deallocate()
 
 		// Create the new cDashes
 		self.cDashes = UnsafeMutablePointer<Double>.allocate(capacity:self.dashes.count)
 		if self.dashes.count > 0 {
-			cDashes.initialize(from:self.dashes)
+            self.cDashes.deallocate()
+            let x = UnsafeMutableBufferPointer<Double>.allocate(capacity: self.dashes.count)
+            let _ = x.initialize(from: self.dashes)
+            cDashes = x.baseAddress!
 		}
 		self.cNumDashes = self.dashes.count
 	}
