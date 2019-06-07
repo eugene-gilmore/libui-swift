@@ -7,5 +7,8 @@ let package = Package(
     dependencies: [
         .package(url: "/Users/eugene/src/clibui", .branch("master")),
         //.package(url: "https://github.com/eugene-gilmore/clibui.git", from : "1.0.0"),
+    ],
+    targets: [
+        .target(name: "ui", dependencies: [])
     ]
 )
