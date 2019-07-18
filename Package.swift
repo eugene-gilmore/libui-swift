@@ -1,4 +1,5 @@
 // swift-tools-version:5.0
+
 import PackageDescription
 
 let package = Package(
@@ -8,6 +9,6 @@ let package = Package(
             name: "clibui",
             path: "Libraries/clibui"
         ),
-        .target(name: "libui-swift", dependencies: ["clibui"])
+        .target(name: "ui", dependencies: ["clibui"])
     ]
 )

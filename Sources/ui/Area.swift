@@ -55,20 +55,20 @@ public class AreaHandler {
 	private var onKeyEventHandler: (Area, KeyEvent) -> Int
 
 	public init() {
-		self.onDrawHandler = { _ in }
-		self.onMouseEventHandler = { _ in }
-		self.onMouseCrossedHandler = { _ in }
+		self.onDrawHandler = { _,_  in }
+		self.onMouseEventHandler = { _,_  in }
+		self.onMouseCrossedHandler = { _,_  in }
 		self.onDragBrokenHandler = { _ in }
-		self.onKeyEventHandler = { _ in return 0 }
+		self.onKeyEventHandler = { _,_  in return 0 }
 
 		handler = clibui.uiAreaHandler()
 
 		// Give these defaults, otherwise libui will segfault
-		handler.Draw = { _ in }
-		handler.MouseEvent = { _ in }
-		handler.MouseCrossed = { _ in }
-		handler.DragBroken = { _ in }
-		handler.KeyEvent = { _ in return 0 }
+		handler.Draw = { _,_,_  in }
+		handler.MouseEvent = { _,_,_  in }
+		handler.MouseCrossed = { _,_,_  in }
+		handler.DragBroken = { _,_  in }
+		handler.KeyEvent = { _,_,_  in return 0 }
 	}
 
 	public func on(draw: @escaping (Area, DrawParams) -> Void) -> Void {
