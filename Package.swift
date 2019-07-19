@@ -4,6 +4,13 @@ import PackageDescription
 
 let package = Package(
     name: "ui",
+    products: [
+        .library(
+            name: "ui-swift",
+            type: .dynamic,
+            targets:["ui"]
+        )
+    ],
     targets: [
         .systemLibrary(
             name: "clibui",
